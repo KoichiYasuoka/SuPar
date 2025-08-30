@@ -562,7 +562,7 @@ class Parser(object):
         args = Config(**locals())
         if not os.path.exists(path):
             path = download(supar.MODEL[src].get(path, path), reload=reload)
-        state = torch.load(path, map_location='cpu')
+        state = torch.load(path, map_location='cpu', weights_only=False)
         cls = supar.PARSER[state['name']] if cls.NAME is None else cls
         args = state['args'].update(args)
         model = cls.MODEL(**args)
